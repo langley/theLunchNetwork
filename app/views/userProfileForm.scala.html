@@ -1,0 +1,91 @@
+@(userProfileForm: Form[UserProfile])(implicit flash: Flash)
+@import helper.twitterBootstrap._
+@main("User Profile") {
+  @helper.form(action = routes.UserProfileController.update) {
+            @userProfileForm.globalError.map { error =>
+                <p class="error">
+                    @error.message
+                </p>
+            }
+            @flash.get("success").map { message =>
+                <p class="success">
+                    @message
+                </p>
+            }
+
+      @helper.inputText(userProfileForm("name"),
+								'_label -> "User Name",
+								'_help -> "", // otherwise it indicates required
+								'_error -> userProfileForm.globalError,
+								'placeholder -> "Your Name",
+								'class -> "input-xxlarge"            
+      )
+      
+      @helper.inputText(userProfileForm("email"),
+								'_label -> "Email",
+								'_help -> "", // otherwise it indicates required
+								'_error -> userProfileForm.globalError,
+								'placeholder -> "Your Email, used for logging in too. ",
+								'class -> "input-xxlarge"            
+      )
+      
+      @helper.inputText(userProfileForm("password"),
+								'_label -> "Password",
+								'_help -> "", // otherwise it indicates required
+								'_error -> userProfileForm.globalError,
+								'placeholder -> "Secret!",
+								'class -> "input-xxlarge"      
+      )            
+      
+      @helper.inputText(userProfileForm("url"),
+								'_label -> "Home Page",
+								'_help -> "", // otherwise it indicates required
+								'_error -> userProfileForm.globalError,
+								'placeholder -> "Your home page or one describing you",
+								'class-> "input-xxlarge"
+      )
+      
+      @helper.textarea(userProfileForm("desc"),
+								'_label -> "Description",
+								'_help -> "", // otherwise it indicates required
+								'_error -> userProfileForm.globalError,
+								'placeholder -> "Describe yourself",
+								'class-> "input-xxlarge"
+  		)
+      
+      @helper.inputText(userProfileForm("phone"),
+								'_label -> "Contact Phone#",
+								'_help -> "", // otherwise it indicates required
+								'_error -> userProfileForm.globalError,
+								'placeholder -> "Best phone# to reach you at for lunch contacts",
+								'class-> "input-xxlarge"
+      )
+      
+      @helper.inputText(userProfileForm("org"),
+								'_label -> "Organization",
+								'_help -> "", // otherwise it indicates required
+								'_error -> userProfileForm.globalError,
+								'placeholder -> "What orgnaization do you work for?",
+								'class-> "input-xxlarge"
+      )
+								
+      @helper.inputText(userProfileForm("nextDateBegin"),
+								'_label -> "Next Available Lunch Begin",
+								'_help -> "", // otherwise it indicates required
+								'_error -> userProfileForm.globalError,
+								'placeholder -> "What date and time could you go to lunch?",
+								'class-> "input-xxlarge"
+      )
+
+      @helper.inputText(userProfileForm("nextDateEnd"),
+								'_label -> "Next Available Lunch End",
+								'_help -> "", // otherwise it indicates required
+								'_error -> userProfileForm.globalError,
+								'placeholder -> "What date and time do you need to end?",
+								'class-> "input-xxlarge"
+      )
+
+      <button class="btn">Submit</button> <a class="btn" href="@routes.Application.index">Cancel</a> 								
+  }
+  
+}
